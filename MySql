@@ -38,7 +38,9 @@ INSERT INTO ContaBancaria(numeroDaConta, agencia, tipoConta, saldo, Cpf_Cliente)
 
 SELECT * FROM ContaBancaria;
 
-SELECT Cliente.nome, ContaBancaria.saldo
-FROM Cliente
-INNER JOIN ContaBancaria
-ON Cliente.cpf = ContaBancaria.Cpf_Cliente;
+SELECT 
+	C.nome AS NomeDoCliente,
+    CB.saldo AS Saldo
+FROM Cliente C
+INNER JOIN ContaBancaria CB
+ON C.cpf = CB.Cpf_Cliente;
