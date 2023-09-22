@@ -1,0 +1,44 @@
+CREATE DATABASE BANCO;
+
+USE BANCO;
+
+CREATE TABLE Cliente(
+	cpf CHAR(11) PRIMARY KEY ,
+    nome VARCHAR(150) NOT NULL,
+    endereco VARCHAR(150) NOT NULL,
+    telefone VARCHAR(22) NOT NULL,
+    email VARCHAR(50) NOT NULL
+);
+
+
+
+CREATE TABLE ContaBancaria(
+	numeroDaConta VARCHAR(250) PRIMARY KEY,
+    agencia VARCHAR(50) NOT NULL,
+    tipoConta VARCHAR(20) NOT NULL,
+    saldo REAL,
+    Cpf_Cliente CHAR(11),
+	FOREIGN KEY (Cpf_Cliente) REFERENCES Cliente(cpf)
+);
+
+
+INSERT INTO Cliente (cpf, nome, endereco, telefone, email) VALUES
+('47564810866', 'Guilherme', 'Rua 2 de julho', '(11) 1234-5678','guilherme@gmail.com'),
+('78965412345', 'Brenda', 'Rua 25 de abril', '(74) 1234-1234', 'brenda@gmail.com'),
+('12346457897', 'Lucas', 'Rua 26 de agosto', '(71) 7651-1234', 'lucas@gmail.com'),
+('46597813212', 'Yasmin', 'Rua coutos', '(21) 9999-1234', 'yasmin@gmail.com'),
+('46545987321', 'Ana Banana', 'Rua marcos', '(21) 9999-6541', 'ana@gmail.com');
+
+INSERT INTO ContaBancaria(numeroDaConta, agencia, tipoConta, saldo, Cpf_Cliente) VALUES
+('12321', '85', 'Poupança', 125.85, '78965412345'),
+('78965', '11', 'Corrente', 1254.12,'12346457897'),
+('465978', '11', 'Poupanca', 456.87, '12346457897'),
+('978321', '75', 'Corrente', 321.45, '46597813212'),
+('457541', '75', 'Poupanca', 465.12, '46545987321');
+
+SELECT * FROM ContaBancaria;
+
+SELECT Cliente.nome, ContaBancaria.saldo
+FROM Cliente
+INNER JOIN ContaBancaria
+ON Cliente.cpf = ContaBancaria.Cpf_Cliente;
